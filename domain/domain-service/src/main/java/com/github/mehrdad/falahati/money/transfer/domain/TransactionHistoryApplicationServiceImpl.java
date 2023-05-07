@@ -6,7 +6,6 @@ import com.github.mehrdad.falahati.money.transfer.domain.dto.transaction.ReportT
 import com.github.mehrdad.falahati.money.transfer.domain.dto.transaction.ReportTransactionResponse;
 import com.github.mehrdad.falahati.money.transfer.domain.entity.Account;
 import com.github.mehrdad.falahati.money.transfer.domain.entity.TransactionHistory;
-import com.github.mehrdad.falahati.money.transfer.domain.entity.User;
 import com.github.mehrdad.falahati.money.transfer.domain.event.TransactionEvent;
 import com.github.mehrdad.falahati.money.transfer.domain.exception.TransactionException;
 import com.github.mehrdad.falahati.money.transfer.domain.exception.UserDomainException;
