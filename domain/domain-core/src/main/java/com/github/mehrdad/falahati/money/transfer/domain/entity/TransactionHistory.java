@@ -8,14 +8,13 @@ import com.github.mehrdad.falahati.money.transfer.domain.valueobject.Transaction
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.UUID;
 
 public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
 
     public static final String UTC = "UTC";
-    private final Account withdrawAccount;
-    private final Account depositAccount;
+    private final Account fromAccount;
+    private final Account toAccount;
     private final Money amount;
     private TransactionStatus status;
     private ZonedDateTime createAt;
@@ -28,17 +27,17 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
     public void validateTransactionHistory() {
         if (amount == null || !amount.isGreaterThanZero())
             throw new TransactionException("Amount must be greater than zero!");
-        if (!withdrawAccount.getCurrentBalance().isGreaterThan(amount)) {
+        if (!fromAccount.getCurrentBalance().isGreaterThan(amount)) {
             throw new TransactionException("Account doesn't have enough money");
         }
     }
 
     public void withdraw() {
-        withdrawAccount.updateCurrentBalance(withdrawAccount.getCurrentBalance().subtract(amount));
+        fromAccount.updateCurrentBalance(fromAccount.getCurrentBalance().subtract(amount));
     }
 
     public void deposit() {
-        depositAccount.updateCurrentBalance(depositAccount.getCurrentBalance().add(amount));
+        toAccount.updateCurrentBalance(toAccount.getCurrentBalance().add(amount));
     }
 
     public void updateStatus(TransactionStatus status) {
@@ -47,8 +46,8 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
 
     private TransactionHistory(Builder builder) {
         super.setId(builder.id);
-        withdrawAccount = builder.withdrawAccount;
-        depositAccount = builder.depositAccount;
+        fromAccount = builder.fromAccount;
+        toAccount = builder.toAccount;
         amount = builder.amount;
         status = builder.status;
         createAt = builder.createAt;
@@ -58,12 +57,12 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
         return new Builder();
     }
 
-    public Account getWithdrawAccount() {
-        return withdrawAccount;
+    public Account getFromAccount() {
+        return fromAccount;
     }
 
-    public Account getDepositAccount() {
-        return depositAccount;
+    public Account getToAccount() {
+        return toAccount;
     }
 
     public Money getAmount() {
@@ -80,8 +79,8 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
 
     public static final class Builder {
         private TransactionHistoryId id;
-        private Account withdrawAccount;
-        private Account depositAccount;
+        private Account fromAccount;
+        private Account toAccount;
         private Money amount;
         private TransactionStatus status;
         private ZonedDateTime createAt;
@@ -94,13 +93,13 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
             return this;
         }
 
-        public Builder withdrawAccount(Account val) {
-            withdrawAccount = val;
+        public Builder fromAccount(Account val) {
+            fromAccount = val;
             return this;
         }
 
-        public Builder depositAccount(Account val) {
-            depositAccount = val;
+        public Builder toAccount(Account val) {
+            toAccount = val;
             return this;
         }
 

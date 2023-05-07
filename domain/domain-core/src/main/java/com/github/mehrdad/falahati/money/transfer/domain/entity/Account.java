@@ -21,8 +21,7 @@ public class Account extends BaseEntity<AccountId> {
     public static Builder builder() {
         return new Builder();
     }
-
-
+    
     public String getAccountNumber() {
         return accountNumber;
     }
