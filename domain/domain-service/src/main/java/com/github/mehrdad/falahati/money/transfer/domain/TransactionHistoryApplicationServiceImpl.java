@@ -7,7 +7,7 @@ import com.github.mehrdad.falahati.money.transfer.domain.dto.transaction.ReportT
 import com.github.mehrdad.falahati.money.transfer.domain.entity.Account;
 import com.github.mehrdad.falahati.money.transfer.domain.entity.TransactionHistory;
 import com.github.mehrdad.falahati.money.transfer.domain.event.TransactionEvent;
-import com.github.mehrdad.falahati.money.transfer.domain.exception.TransactionException;
+import com.github.mehrdad.falahati.money.transfer.domain.exception.TransactionDomainException;
 import com.github.mehrdad.falahati.money.transfer.domain.exception.UserDomainException;
 import com.github.mehrdad.falahati.money.transfer.domain.mapper.TransactionHistoryDataMapper;
 import com.github.mehrdad.falahati.money.transfer.domain.port.input.service.TransactionHistoryApplicationService;
@@ -31,7 +31,7 @@ public class TransactionHistoryApplicationServiceImpl implements TransactionHist
     private final TransactionHistoryDomainService transactionHistoryDomainService;
 
     @Override
-    @Transactional(noRollbackFor = TransactionException.class)
+    @Transactional(noRollbackFor = TransactionDomainException.class)
     public CreateTransactionResponse createTransaction(CreateTransactionCommand createTransactionCommand) {
         Account fromAccount = accountService.accountByAccountNumber(createTransactionCommand.fromAccountNumber());
         Account toAccount = accountService.accountByAccountNumber(createTransactionCommand.toAccountNumber());
@@ -40,7 +40,7 @@ public class TransactionHistoryApplicationServiceImpl implements TransactionHist
         TransactionHistory result = saveUser(transactionHistory);
         log.info("Transaction is created with id: {}", transactionEvent.getTransactionHistory().getId().getValue());
         if (!transactionEvent.getFailureMessages().isEmpty())
-            throw new TransactionException(String.join(",", transactionEvent.getFailureMessages()));
+            throw new TransactionDomainException(String.join(",", transactionEvent.getFailureMessages()));
         return transactionHistoryDataMapper.transactionHistoryToCreateTransactionResponse(result);
     }
 
