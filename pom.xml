@@ -23,6 +23,7 @@
 		<module>domain</module>
 		<module>dataaccess</module>
 		<module>security</module>
+		<module>commen</module>
 	</modules>
 
 	<properties>
@@ -59,6 +60,11 @@
 			<dependency>
 				<groupId>com.github.mehrdad.falahati</groupId>
 				<artifactId>security</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>common-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

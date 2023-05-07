@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.mehrdad.falahati</groupId>
-        <artifactId>domain</artifactId>
+        <artifactId>common</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>domain-core</artifactId>
+    <artifactId>common-domain</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -17,10 +17,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.github.mehrdad.falahati</groupId>
-            <artifactId>common-domain</artifactId>
-        </dependency>
-    </dependencies>
 </project>
