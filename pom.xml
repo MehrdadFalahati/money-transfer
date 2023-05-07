@@ -11,11 +11,54 @@
 	<groupId>com.github.mehrdad.falahati</groupId>
 	<artifactId>money-transfer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>money-transfer</name>
 	<description>This is a project for transferring money between 2 credit cards.</description>
+	<modules>
+		<module>application</module>
+		<module>container</module>
+		<module>domain</module>
+		<module>dataaccess</module>
+		<module>security</module>
+	</modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>domain-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mehrdad.falahati</groupId>
+				<artifactId>security</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
