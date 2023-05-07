@@ -48,7 +48,7 @@ public class TransactionHistoryApplicationServiceImpl implements TransactionHist
     @Transactional(readOnly = true)
     public ReportTransactionResponse reportTransactions(ReportTransactionQuery reportTransactionQuery) {
         List<TransactionHistory> transactionHistories = transactionHistoryRepository.findByAccountFromAccountNumberAndTransactionDateBetween(reportTransactionQuery.accountNumber(),
-                reportTransactionQuery.fromDate(), reportTransactionQuery.toDate());
+                reportTransactionQuery.getFromDate(), reportTransactionQuery.getToDate());
         return transactionHistoryDataMapper.transactionHistoriesToReportTransactionResponse(transactionHistories);
     }
 

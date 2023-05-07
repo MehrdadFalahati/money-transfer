@@ -6,6 +6,8 @@ import com.github.mehrdad.falahati.money.transfer.domain.valueobject.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class UserDataAccessMapper {
@@ -20,6 +22,10 @@ public class UserDataAccessMapper {
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .phoneNumber(user.getPhoneNumber())
+                .accounts(user.getAccounts()
+                        .stream()
+                        .map(accountDataAccessMapper::accountToEntity)
+                        .collect(Collectors.toSet()))
                 .build();
     }
 

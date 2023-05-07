@@ -28,7 +28,7 @@ public class TransactionController {
     }
 
     @GetMapping("/reports")
-    public ResponseEntity<ReportTransactionResponse> reports(@RequestBody ReportTransactionQuery reportTransactionQuery) {
+    public ResponseEntity<ReportTransactionResponse> reports(ReportTransactionQuery reportTransactionQuery) {
         log.info("Transaction report for Account[accountNumber={}]", reportTransactionQuery.accountNumber());
         ReportTransactionResponse reportTransactionResponse = transactionHistoryApplicationService.reportTransactions(reportTransactionQuery);
         return ResponseEntity.ok(reportTransactionResponse);

@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponse);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/accounts")
     public ResponseEntity<CreateAccountResponse> addAccounts(@PathVariable String id, @RequestBody CreateAccountCommand createAccountCommand) {
         log.info("Adding account to User[userId={}]", id);
         CreateAccountResponse createAccountResponse = userApplicationService.addAccountsToUser(UUID.fromString(id), createAccountCommand);
