@@ -1,0 +1,5 @@
+DROP SCHEMA IF EXISTS money_transfer CASCADE;
+
+CREATE SCHEMA money_transfer;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
