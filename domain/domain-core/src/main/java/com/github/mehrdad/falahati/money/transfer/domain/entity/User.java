@@ -1,12 +1,12 @@
 package com.github.mehrdad.falahati.money.transfer.domain.entity;
 
-import com.github.mehrdad.falahati.common.domain.entity.BaseEntity;
+import com.github.mehrdad.falahati.common.domain.entity.AggregateRoot;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.UserId;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class User extends BaseEntity<UserId> {
+public class User extends AggregateRoot<UserId> {
     private final String firstName;
     private final String lastName;
     private final String username;

@@ -1,18 +1,49 @@
 package com.github.mehrdad.falahati.money.transfer.domain.entity;
 
 import com.github.mehrdad.falahati.common.domain.entity.AggregateRoot;
+import com.github.mehrdad.falahati.money.transfer.domain.exception.TransactionException;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.Money;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.TransactionHistoryId;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.TransactionStatus;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 
 public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
+
+    public static final String UTC = "UTC";
     private final Account withdrawAccount;
     private final Account depositAccount;
     private final Money amount;
     private TransactionStatus status;
     private ZonedDateTime createAt;
+
+    public void initializeTransactionHistory() {
+        setId(new TransactionHistoryId(UUID.randomUUID()));
+        createAt = ZonedDateTime.now(ZoneId.of(UTC));
+    }
+
+    public void validateTransactionHistory() {
+        if (amount == null || !amount.isGreaterThanZero())
+            throw new TransactionException("Amount must be greater than zero!");
+        if (!withdrawAccount.getCurrentBalance().isGreaterThan(amount)) {
+            throw new TransactionException("Account doesn't have enough money");
+        }
+    }
+
+    public void withdraw() {
+        withdrawAccount.updateCurrentBalance(withdrawAccount.getCurrentBalance().subtract(amount));
+    }
+
+    public void deposit() {
+        depositAccount.updateCurrentBalance(depositAccount.getCurrentBalance().add(amount));
+    }
+
+    public void updateStatus(TransactionStatus status) {
+        this.status = status;
+    }
 
     private TransactionHistory(Builder builder) {
         super.setId(builder.id);

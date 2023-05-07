@@ -6,12 +6,16 @@ import com.github.mehrdad.falahati.money.transfer.domain.valueobject.Money;
 
 public class Account extends BaseEntity<AccountId> {
     private final String accountNumber;
-    private final Money currentBalance;
+    private Money currentBalance;
 
     private Account(Builder builder) {
         super.setId(builder.id);
         accountNumber = builder.accountNumber;
         currentBalance = builder.currentBalance;
+    }
+
+    public void updateCurrentBalance(Money balance) {
+        this.currentBalance = balance;
     }
 
     public static Builder builder() {
