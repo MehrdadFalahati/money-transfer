@@ -1,13 +1,13 @@
 package com.github.mehrdad.falahati.money.transfer.domain.entity;
 
 import com.github.mehrdad.falahati.common.domain.entity.AggregateRoot;
-import com.github.mehrdad.falahati.money.transfer.domain.exception.TransactionException;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.Money;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.TransactionHistoryId;
 import com.github.mehrdad.falahati.money.transfer.domain.valueobject.TransactionStatus;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
@@ -24,11 +24,11 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
         createAt = ZonedDateTime.now(ZoneId.of(UTC));
     }
 
-    public void validateTransactionHistory() {
+    public void validateTransactionHistory(List<String> failureMessages) {
         if (amount == null || !amount.isGreaterThanZero())
-            throw new TransactionException("Amount must be greater than zero!");
+            failureMessages.add("Amount must be greater than zero!");
         if (!fromAccount.getCurrentBalance().isGreaterThan(amount)) {
-            throw new TransactionException("Account doesn't have enough money");
+            failureMessages.add("Account doesn't have enough money");
         }
     }
 
@@ -36,8 +36,16 @@ public class TransactionHistory extends AggregateRoot<TransactionHistoryId> {
         fromAccount.updateCurrentBalance(fromAccount.getCurrentBalance().subtract(amount));
     }
 
+    public void withdrawFailed() {
+        fromAccount.updateCurrentBalance(fromAccount.getCurrentBalance().add(amount));
+    }
+
     public void deposit() {
         toAccount.updateCurrentBalance(toAccount.getCurrentBalance().add(amount));
+    }
+
+    public void depositFailed() {
+        toAccount.updateCurrentBalance(toAccount.getCurrentBalance().subtract(amount));
     }
 
     public void updateStatus(TransactionStatus status) {
