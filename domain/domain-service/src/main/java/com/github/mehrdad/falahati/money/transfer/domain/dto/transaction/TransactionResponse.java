@@ -1,5 +1,6 @@
 package com.github.mehrdad.falahati.money.transfer.domain.dto.transaction;
 
+import com.github.mehrdad.falahati.money.transfer.domain.valueobject.TransactionStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
@@ -13,6 +14,7 @@ public record TransactionResponse(
         @NotNull String fromAccountNumber,
         @NotNull String toAccountNumber,
         @NotNull BigDecimal transferAmount,
-        @NotNull Instant transactionDate
+        @NotNull Instant transactionDate,
+        @NotNull TransactionStatus status
 ) {
 }
