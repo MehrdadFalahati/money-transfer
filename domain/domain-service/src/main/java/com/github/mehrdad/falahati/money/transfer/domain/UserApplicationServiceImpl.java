@@ -43,7 +43,7 @@ public class UserApplicationServiceImpl implements UserApplicationService {
         createAccountCommand.accounts().stream()
                 .map(userDataMapper::accountInformationToAccount)
                 .forEach(user::addAccounts);
-        User result = saveUser(user, "inserted accounts");
+        User result = saveUser(user, "inserted accounts to DB");
         return userDataMapper.userToAccountResponse(result);
     }
 
