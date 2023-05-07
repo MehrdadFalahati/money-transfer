@@ -16,4 +16,12 @@ public class AccountDataAccessMapper {
                 .currentBalance(new Money(account.getCurrentBalance()))
                 .build();
     }
+
+    public AccountEntity accountToEntity(Account account) {
+        return AccountEntity.builder()
+                .id(account.getId().getValue())
+                .accountNumber(account.getAccountNumber())
+                .currentBalance(account.getCurrentBalance().amount())
+                .build();
+    }
 }
