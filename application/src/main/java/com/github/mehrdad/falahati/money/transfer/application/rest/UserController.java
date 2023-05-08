@@ -10,6 +10,7 @@ import com.github.mehrdad.falahati.money.transfer.domain.entity.User;
 import com.github.mehrdad.falahati.money.transfer.domain.exception.UserDomainException;
 import com.github.mehrdad.falahati.money.transfer.domain.port.input.service.UserApplicationService;
 import com.github.mehrdad.falahati.money.transfer.security.util.JwtTokenUtil;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}/accounts")
+    @SecurityRequirement(name = "security")
     @PreAuthorize("hasAnyAuthority('account:write')")
     public ResponseEntity<CreateAccountResponse> addAccounts(@PathVariable String id, @RequestBody CreateAccountCommand createAccountCommand) {
         log.info("Adding account to User[userId={}]", id);

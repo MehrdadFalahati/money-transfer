@@ -5,6 +5,7 @@ import com.github.mehrdad.falahati.money.transfer.domain.dto.transaction.CreateT
 import com.github.mehrdad.falahati.money.transfer.domain.dto.transaction.ReportTransactionQuery;
 import com.github.mehrdad.falahati.money.transfer.domain.dto.transaction.ReportTransactionResponse;
 import com.github.mehrdad.falahati.money.transfer.domain.port.input.service.TransactionHistoryApplicationService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/transactions")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "security")
 public class TransactionController {
 
     private final TransactionHistoryApplicationService transactionHistoryApplicationService;

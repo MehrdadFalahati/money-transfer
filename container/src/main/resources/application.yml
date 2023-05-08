@@ -10,6 +10,13 @@ app:
     jwt-secret: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure
     jwt-issuer: io.example
 
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
 spring:
   jpa:
     show-sql: true
