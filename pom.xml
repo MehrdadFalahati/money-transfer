@@ -24,7 +24,8 @@
 		<module>dataaccess</module>
 		<module>security</module>
 		<module>commen</module>
-	</modules>
+        <module>infrastructure</module>
+    </modules>
 
 	<properties>
 		<java.version>17</java.version>
