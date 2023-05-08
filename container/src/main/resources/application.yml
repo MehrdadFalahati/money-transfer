@@ -5,6 +5,11 @@ logging:
   level:
     com.github.mehrdad.falahati : DEBUG
 
+app:
+  jwt:
+    jwt-secret: securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure
+    jwt-issuer: io.example
+
 spring:
   jpa:
     show-sql: true

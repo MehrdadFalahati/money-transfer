@@ -20,11 +20,11 @@ public class UserDataMapper {
     public User createUserCommandToUser(CreateUserCommand createUserCommand) {
         return User.builder()
                 .id(new UserId(UUID.randomUUID()))
-                .firstName(createUserCommand.firstName())
-                .lastName(createUserCommand.lastName())
-                .username(createUserCommand.username())
-                .password(createUserCommand.password())
-                .phoneNumber(createUserCommand.phoneNumber())
+                .firstName(createUserCommand.getFirstName())
+                .lastName(createUserCommand.getLastName())
+                .username(createUserCommand.getUsername())
+                .password(createUserCommand.getPassword())
+                .phoneNumber(createUserCommand.getPhoneNumber())
                 .build();
     }
 
