@@ -12,7 +12,9 @@ public class User extends AggregateRoot<UserId> {
     private final String username;
     private final String password;
     private final String phoneNumber;
+    private final Boolean isEnabled;
     private final Set<Account> accounts;
+    private final Set<Role> roles = new HashSet<>();
 
     private User(Builder builder) {
         super.setId(builder.id);
@@ -22,6 +24,8 @@ public class User extends AggregateRoot<UserId> {
         password = builder.password;
         phoneNumber = builder.phoneNumber;
         accounts = new HashSet<>();
+        isEnabled = true;
+        roles.add(Role.CUSTOMER);
     }
 
     public static Builder builder() {
@@ -56,6 +60,13 @@ public class User extends AggregateRoot<UserId> {
         accounts.add(account);
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public Boolean getEnabled() {
+        return isEnabled;
+    }
 
     public static final class Builder {
         private UserId id;

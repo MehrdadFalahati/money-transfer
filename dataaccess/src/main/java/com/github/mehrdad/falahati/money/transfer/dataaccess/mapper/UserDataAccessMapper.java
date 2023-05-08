@@ -26,6 +26,8 @@ public class UserDataAccessMapper {
                         .stream()
                         .map(accountDataAccessMapper::accountToEntity)
                         .collect(Collectors.toSet()))
+                .roles(user.getRoles())
+                .isEnabled(user.getEnabled())
                 .build();
     }
 

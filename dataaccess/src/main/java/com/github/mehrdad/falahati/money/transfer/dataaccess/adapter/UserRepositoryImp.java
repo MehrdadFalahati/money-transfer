@@ -26,4 +26,9 @@ public class UserRepositoryImp implements UserRepository {
     public Optional<User> findById(UserId userId) {
         return userJpaRepository.findById(userId.getValue()).map(userDataAccessMapper::entityToUser);
     }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userJpaRepository.findByUsername(username).map(userDataAccessMapper::entityToUser);
+    }
 }

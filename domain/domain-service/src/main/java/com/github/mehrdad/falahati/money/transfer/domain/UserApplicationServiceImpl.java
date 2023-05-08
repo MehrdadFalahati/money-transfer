@@ -47,6 +47,14 @@ public class UserApplicationServiceImpl implements UserApplicationService {
         return userDataMapper.userToAccountResponse(result);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("User[username=" + username +"] not found!"));
+    }
+
+
     private User saveUser(User user, String message) {
         User result = userRepository.save(user);
         if (result == null) {

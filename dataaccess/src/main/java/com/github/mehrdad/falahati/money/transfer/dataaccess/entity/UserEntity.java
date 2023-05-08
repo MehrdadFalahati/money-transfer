@@ -1,5 +1,6 @@
 package com.github.mehrdad.falahati.money.transfer.dataaccess.entity;
 
+import com.github.mehrdad.falahati.money.transfer.domain.entity.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,12 @@ public class UserEntity {
             , joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "account_id") })
     @Builder.Default
     private Set<AccountEntity> accounts = new HashSet<>();
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @Builder.Default
+    private Set<Role> roles = new HashSet<>();
+
+    private Boolean isEnabled;
 
     @Override
     public boolean equals(Object o) {
