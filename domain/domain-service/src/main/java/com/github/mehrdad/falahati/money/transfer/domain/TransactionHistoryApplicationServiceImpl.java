@@ -41,7 +41,7 @@ public class TransactionHistoryApplicationServiceImpl implements TransactionHist
         log.info("Transaction is created with id: {}", transactionEvent.getTransactionHistory().getId().getValue());
         if (!transactionEvent.getFailureMessages().isEmpty())
             throw new TransactionDomainException(String.join(",", transactionEvent.getFailureMessages()));
-        return transactionHistoryDataMapper.transactionHistoryToCreateTransactionResponse(result);
+        return transactionHistoryDataMapper.transactionHistoryToCreateTransactionResponse(transactionEvent.getTransactionHistory());
     }
 
     @Override
